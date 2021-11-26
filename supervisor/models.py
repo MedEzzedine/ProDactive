@@ -2,16 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-class CustomUser(models.Model):
-    firstName = models.CharField(max_length=100)
-    lastName = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    password = models.CharField(max_length=50)
-    inscriptionDate = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        abstract = True
-
 class Absence(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
@@ -28,13 +18,13 @@ class Message(models.Model):
     def __str__(self):
         return f"{self.type} Message"
 
-class Employee(CustomUser):
+class Employee(models.Model):
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     password = models.CharField(max_length=50)
     grade = models.IntegerField(default=1)
-    score = models.IntegerField(default=30)
+    monthlyScore = models.IntegerField(default=30)
     absenceCollection = models.ForeignKey(Absence, on_delete=models.CASCADE, null=True, blank=True, default='')
     messageCollection = models.ForeignKey(Message, on_delete=models.CASCADE, null=True, blank=True, default='')
     inscriptionDate = models.DateTimeField(auto_now_add=True)
