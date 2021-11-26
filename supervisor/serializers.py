@@ -6,11 +6,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = '__all__'
 
-class SupervisorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Supervisor
-        fields = '__all__'
-
 class AbsenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Absence
