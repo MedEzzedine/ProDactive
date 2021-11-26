@@ -21,6 +21,7 @@ class Supervisor(CustomUser):
 class Absence(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
+    valid = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Employee Absent on day {self.date}"
