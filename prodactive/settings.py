@@ -28,7 +28,9 @@ SECRET_KEY = 'django-insecure-58$+6%*)x1=0!_ae=y4tqz8tibwhjd$o3&&rmjcs8v)gvoj6ce
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://prodactive-botapi-test.herokuapp.com/',
+                 'localhost',
+                 '127.0.0.1']
 
 
 # Application definition
