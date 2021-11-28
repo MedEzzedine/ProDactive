@@ -6,7 +6,7 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import requests
+#import requests
 
 # Create your views here.
 
@@ -25,5 +25,6 @@ class EmployeeAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def collectData(request):
-    response = requests.get("https://g7-prodactive.herokuapp.com/test/")
+"""def collectData(request):
+    response = requests.get("https://g7-prodactive.herokuapp.com/test/")"""
+
