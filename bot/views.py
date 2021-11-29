@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 
 # Create your views here.
 
-class EmployeeAPIView(APIView):
+"""class EmployeeAPIView(APIView):
 
     def get(self, request):
         employee = Employee.objects.all()
@@ -25,7 +25,7 @@ class EmployeeAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
 
 @api_view(["GET"])
 def get_allEmployees(request):
