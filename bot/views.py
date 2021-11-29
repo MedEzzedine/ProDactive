@@ -29,7 +29,7 @@ from rest_framework.decorators import api_view
 
 @api_view(["GET"])
 def allEmployees(request):
-    #employee = Employee.objects.all()
+    employee = Employee.objects.all()
     #serializer = EmployeeSerializer(employee, many=True)
     return Response({"name": "Anas"})
 
