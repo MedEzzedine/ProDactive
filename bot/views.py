@@ -30,8 +30,8 @@ from rest_framework.decorators import api_view
 @api_view(["GET"])
 def allEmployees(request):
     employee = Employee.objects.all()
-    #serializer = EmployeeSerializer(employee, many=True)
-    return Response({"name": "Anas"})
+    serializer = EmployeeSerializer(employee, many=True)
+    return Response(serializer.data)
 
 """def collectData(request):
     response = requests.get("https://g7-prodactive.herokuapp.com/test/")"""
