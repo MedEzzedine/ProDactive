@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from celery.schedules import crontab
+from celery.task import periodic_task
 
 #import requests
 
@@ -27,6 +29,7 @@ from rest_framework.decorators import api_view
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
 
+
 @api_view(["GET"])
 def allEmployees(request):
     employee = Employee.objects.all()
@@ -34,5 +37,6 @@ def allEmployees(request):
     return Response(serializer.data)
 
 """def collectData(request):
-    response = requests.get("https://g7-prodactive.herokuapp.com/test/")"""
+    response = requests.get("https://prodactive-botapi-test.herokuapp.com/employee/")
+    print(response.text)"""
 
