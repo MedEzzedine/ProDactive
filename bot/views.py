@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from django.http import HttpResponse,JsonResponse
+
 #from celery.schedules import crontab
 #from celery.task import periodic_task
 
@@ -39,4 +41,8 @@ def allEmployees(request):
 """def collectData(request):
     response = requests.get("https://prodactive-botapi-test.herokuapp.com/employee/")
     print(response.text)"""
-
+@api_view(["POST"])
+def checkAbsenceByDay(request):
+    #serializer = AbsentEmployeesSerializer(data=request.data)
+    #print(serializer)
+    return HttpResponse(JsonResponse({"id":"1","nom":"anas"},safe=False))

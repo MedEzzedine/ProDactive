@@ -17,3 +17,4 @@ class EmployeeSerializer(serializers.ModelSerializer):
         #fields = ['firstName', 'lastName', 'email', 'grade', 'score', 'inscriptionDate']
         fields = '__all__'
         depth = 1
+
