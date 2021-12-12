@@ -16,7 +16,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = Employee
         #fields = ['firstName', 'lastName', 'email', 'grade', 'score', 'inscriptionDate']
         fields = '__all__'
-        depth = 1
 
 class AbsentEmployeesSerializer(serializers.Serializer):
     date = serializers.DateField()

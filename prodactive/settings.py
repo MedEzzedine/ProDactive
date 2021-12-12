@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_q',
     'bot',
 ]
 
@@ -125,3 +126,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configure your Q cluster
+# More details https://django-q.readthedocs.io/en/latest/configure.html
+Q_CLUSTER = {
+    "name": "prodactive",
+    "orm": "default",  # Use Django's ORM + database for broker
+}
