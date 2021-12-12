@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render
 
 from rest_framework.serializers import Serializer
@@ -7,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from django.http import HttpResponse,JsonResponse
 
 #from celery.schedules import crontab
 #from celery.task import periodic_task
@@ -43,11 +45,12 @@ def allEmployees(request):
 @api_view(["POST"])
 def checkAbsenceByDay(request):
     serializer = AbsentEmployeesSerializer(data=request.data)
-
     if serializer.is_valid():
-        ids = serializer.data["absentEmployees"]
-        for id in ids:
-            emp = Employee.objects.get(pk=id)
+        for id in serializer.data["absentEmployees"]:
+            emp = Employee.objects.get(pk = id)
             emp.absence_set.create(date=serializer.data["date"])
+            emp.monthlyScore-=1
+            emp.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
