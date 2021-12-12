@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from django.http import HttpResponse,JsonResponse
 
 #from celery.schedules import crontab
 #from celery.task import periodic_task
@@ -43,6 +42,12 @@ def allEmployees(request):
     print(response.text)"""
 @api_view(["POST"])
 def checkAbsenceByDay(request):
-    #serializer = AbsentEmployeesSerializer(data=request.data)
-    #print(serializer)
-    return HttpResponse(JsonResponse({"id":"1","nom":"anas"},safe=False))
+    serializer = AbsentEmployeesSerializer(data=request.data)
+
+    if serializer.is_valid():
+        ids = serializer.data["absentEmployees"]
+        for id in ids:
+            emp = Employee.objects.get(pk=id)
+            emp.absence_set.create(date=serializer.data["date"])
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
