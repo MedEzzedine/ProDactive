@@ -35,7 +35,7 @@ class Message(models.Model):
         choices=MessageTypes.choices,
         default=MessageTypes.Warning,
     )
-    content = models.TextField()
+    content = models.TextField()                                                        
     creationDate = models.DateTimeField(auto_now_add=True)
     employeeFK = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True, default='')
     def __str__(self):

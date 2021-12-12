@@ -8,7 +8,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from django.http import HttpResponse,JsonResponse
 
 #from celery.schedules import crontab
 #from celery.task import periodic_task
@@ -42,6 +41,7 @@ def allEmployees(request):
 """def collectData(request):
     response = requests.get("https://prodactive-botapi-test.herokuapp.com/employee/")
     print(response.text)"""
+
 @api_view(["POST"])
 def checkAbsenceByDay(request):
     serializer = AbsentEmployeesSerializer(data=request.data)
@@ -53,4 +53,25 @@ def checkAbsenceByDay(request):
             emp.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def checkAbsenceByMonth(request):
+    employees = Employee.objects.all()
+    for emp in employees:
+        if emp.monthlyScore <= 15:
+            emp.delete()
+            continue
+        emp.monthlyScore = 30
+        emp.save()
+
+def checkAbsenceByYear(request):
+    employees = Employee.objects.all()
+    for emp in employees:
+        if emp.yearlyScore >= 340:
+            emp.grade += 1
+            emp.message_set.create(type='PROMOTION',
+                                   content=f"""Félicitation {emp.firstName.title()} {emp.lastName.title()}, vous êtes promu à un poste supérieur\n\tGrade: {emp.grade}""")
+        emp.yearlyScore = 365
+        emp.monthlyScore = 30
+        emp.save()
+        
 
