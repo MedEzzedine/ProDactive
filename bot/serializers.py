@@ -21,4 +21,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class AbsentEmployeesSerializer(serializers.Serializer):
     date = serializers.DateField()
     absentEmployees = serializers.ListField(child=serializers.IntegerField())
+
+class justificationSerializer(serializers.Serializer):
+    id = serializers.IntegerField
+    justification = serializers.StringRelatedField
     
