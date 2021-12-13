@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render
 
 from rest_framework.serializers import Serializer
@@ -43,6 +44,25 @@ def allEmployees(request):
     print(response.text)"""
 @api_view(["POST"])
 def checkAbsenceByDay(request):
-    #serializer = AbsentEmployeesSerializer(data=request.data)
-    #print(serializer)
-    return HttpResponse(JsonResponse({"id":"1","nom":"anas"},safe=False))
+    serializer = AbsentEmployeesSerializer(data=request.data)
+    if serializer.is_valid():
+        for id in serializer.data["absentEmployees"]:
+            emp = Employee.objects.get(pk = id)
+            abs = Absence(date = serializer.data["date"],employeeFK=emp )
+            abs.save()
+            emp.monthlyScore-=1
+            emp.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def checkAbsenceByDay(request):
+    serializer = AbsentEmployeesSerializer(data=request.data)
+    if serializer.is_valid():
+        for id in serializer.data["absentEmployees"]:
+            emp = Employee.objects.get(pk = id)
+            abs = Absence(date = serializer.data["date"],employeeFK=emp )
+            abs.save()
+            emp.monthlyScore-=1
+            emp.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

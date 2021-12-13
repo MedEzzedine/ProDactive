@@ -18,3 +18,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 1
 
+class AbsentEmployeesSerializer(serializers.Serializer):
+    date = serializers.DateField()
+    absentEmployees = serializers.ListField(child=serializers.IntegerField())
+    
