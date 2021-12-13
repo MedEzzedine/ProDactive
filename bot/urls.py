@@ -5,4 +5,5 @@ urlpatterns = [
     #path("employee/", EmployeeAPIView.as_view()),
     path("employee/", allEmployees),
     path("absentemployees/", checkAbsenceByDay),
+    path("supervisor/absent-employees", getAbsentEmployees)
 ]

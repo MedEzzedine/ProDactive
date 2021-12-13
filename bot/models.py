@@ -20,9 +20,10 @@ class Absence(models.Model):
     justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
     valid = models.BooleanField(default=False)
     checked = models.BooleanField(default=False)
-    employeeFK = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True, default='')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    
     def __str__(self):
-        return f"Employee Absent on day {self.date}"
+        return f"Employee absent on day {self.date}, checked by supervisor: {self.checked} "
 
 class Message(models.Model):
     class MessageTypes(models.TextChoices):
@@ -37,6 +38,6 @@ class Message(models.Model):
     )
     content = models.TextField()
     creationDate = models.DateTimeField(auto_now_add=True)
-    employeeFK = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True, default='')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.type} Message"

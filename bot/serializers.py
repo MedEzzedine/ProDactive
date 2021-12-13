@@ -5,20 +5,25 @@ class AbsenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Absence
         fields = '__all__'
+        depth = 1
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = '__all__'
+        depth = 1
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         #fields = ['firstName', 'lastName', 'email', 'grade', 'score', 'inscriptionDate']
         fields = '__all__'
-        depth = 1
+
 
 class AbsentEmployeesSerializer(serializers.Serializer):
     date = serializers.DateField()
     absentEmployees = serializers.ListField(child=serializers.IntegerField())
     
+#SUPERVISOR
+
+

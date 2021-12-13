@@ -54,3 +54,32 @@ def checkAbsenceByDay(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+#SUPERVISOR#
+@api_view(["GET"])
+def getAbsentEmployees(request):
+    json = dict()
+    employees = Employee.objects.all()
+    for emp in employees:
+        absences = emp.absence_set.all()
+        for absence in absences:
+            print(absence)
+            absence_list = list()
+            if absence.checked == False:
+                absence_info = {
+                    "date": absence.date ,
+	                "justification": absence.justification,
+                }
+                absence_list.append(absence_info)
+        print(absence_list)
+        if len(absence_list)!=0:
+            json[emp.id] = absence_list
+    return Response(json)
+    
+
+
+            
+
+
+
