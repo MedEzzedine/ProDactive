@@ -48,21 +48,9 @@ def checkAbsenceByDay(request):
     if serializer.is_valid():
         for id in serializer.data["absentEmployees"]:
             emp = Employee.objects.get(pk = id)
-            abs = Absence(date = serializer.data["date"],employeeFK=emp )
-            abs.save()
+            emp.absence_set.create(date=serializer.data["date"])
             emp.monthlyScore-=1
             emp.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def checkAbsenceByDay(request):
-    serializer = AbsentEmployeesSerializer(data=request.data)
-    if serializer.is_valid():
-        for id in serializer.data["absentEmployees"]:
-            emp = Employee.objects.get(pk = id)
-            abs = Absence(date = serializer.data["date"],employeeFK=emp )
-            abs.save()
-            emp.monthlyScore-=1
-            emp.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
