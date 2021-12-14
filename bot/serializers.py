@@ -25,9 +25,12 @@ class AbsentEmployeesSerializer(serializers.Serializer):
     absentEmployees = serializers.ListField(child=serializers.IntegerField())
 
 class justificationSerializer(serializers.Serializer):
-    id = serializers.IntegerField
-    justification = serializers.StringRelatedField
+    id = serializers.IntegerField()
+    justification = serializers.URLField()
     
 #SUPERVISOR
+class ModeratedAbsencesSerializer(serializers.Serializer):
+    validatedAbsences = serializers.ListField(child = serializers.IntegerField())
+    rejectedAbsences = serializers.ListField(child = serializers.IntegerField())
 
 

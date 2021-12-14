@@ -17,7 +17,8 @@ class Employee(models.Model):
 
 class Absence(models.Model):
     date = models.DateField()
-    justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
+    justification = models.URLField(null=True, blank=True, default='')
+    #justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
     valid = models.BooleanField(default=False)
     checked = models.BooleanField(default=False)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
