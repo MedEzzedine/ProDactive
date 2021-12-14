@@ -19,13 +19,8 @@ class Absence(models.Model):
     date = models.DateField()
     justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
     valid = models.BooleanField(default=False)
-<<<<<<< HEAD
-    checked = models.BooleanField(default=False)    
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-=======
     checked = models.BooleanField(default=False)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True, default='')
->>>>>>> 9e88450625be401f40fccb8ae9b43e5530f0e86e
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     def __str__(self):
         return f"Employee absent on day {self.date}, checked by supervisor: {self.checked} "
 
@@ -42,10 +37,6 @@ class Message(models.Model):
     )
     content = models.TextField()                                                        
     creationDate = models.DateTimeField(auto_now_add=True)
-<<<<<<< HEAD
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-=======
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True, default='')
->>>>>>> 9e88450625be401f40fccb8ae9b43e5530f0e86e
     def __str__(self):
         return f"{self.type} Message"

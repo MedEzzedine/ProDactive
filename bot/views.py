@@ -51,7 +51,6 @@ def checkAbsenceByDay(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-<<<<<<< HEAD
 
 
 #SUPERVISOR#
@@ -99,7 +98,5 @@ def addAbsenceJustification(request):
         absence.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-=======
         
 
->>>>>>> 9e88450625be401f40fccb8ae9b43e5530f0e86e
