@@ -7,11 +7,7 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view
-from django.http import HttpResponse,JsonResponse
-
-#from celery.schedules import crontab
-#from celery.task import periodic_task
+from rest_framework.decorators import api_view  
 
 #import requests
 
@@ -42,6 +38,7 @@ def allEmployees(request):
 """def collectData(request):
     response = requests.get("https://prodactive-botapi-test.herokuapp.com/employee/")
     print(response.text)"""
+
 @api_view(["POST"])
 def checkAbsenceByDay(request):
     serializer = AbsentEmployeesSerializer(data=request.data)
@@ -54,6 +51,7 @@ def checkAbsenceByDay(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+<<<<<<< HEAD
 
 
 #SUPERVISOR#
@@ -101,3 +99,7 @@ def addAbsenceJustification(request):
         absence.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+=======
+        
+
+>>>>>>> 9e88450625be401f40fccb8ae9b43e5530f0e86e
