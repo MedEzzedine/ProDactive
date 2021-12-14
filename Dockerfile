@@ -1,19 +1,14 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.8-slim
 
-# set work directory
-WORKDIR /usr/src/app
-
-# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+RUN pip install --upgrade pip
+COPY requirements.txt /code/
 
-# install dependencies
-RUN pip install --upgrade pip 
-COPY ./requirements.txt /usr/src/app
 RUN pip install -r requirements.txt
-
-# copy project
-COPY . /usr/src/app
+COPY . /code/
 
 EXPOSE 8000
 

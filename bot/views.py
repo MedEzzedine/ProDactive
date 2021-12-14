@@ -1,5 +1,14 @@
 from datetime import date
 from django.shortcuts import render
+from rest_framework_swagger.views import get_swagger_view
+#from django.conf.urls import url
+
+"""schema_view = get_swagger_view(title='ProDactive')
+
+
+urlpatterns = [
+    url(r'^$', schema_view)
+]"""
 
 from rest_framework.serializers import Serializer
 from .models import *
