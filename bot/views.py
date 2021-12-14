@@ -76,10 +76,3 @@ def getAbsentEmployees(request):
         if len(absence_list)!=0:
             json[emp.id] = absence_list
     return Response(json)
-    
-
-
-            
-
-
-
