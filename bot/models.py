@@ -19,9 +19,8 @@ class Absence(models.Model):
     date = models.DateField()
     justification = models.ImageField(upload_to='pdf', null=True, blank=True, default='')
     valid = models.BooleanField(default=False)
-    checked = models.BooleanField(default=False)
+    checked = models.BooleanField(default=False)    
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    
     def __str__(self):
         return f"Employee absent on day {self.date}, checked by supervisor: {self.checked} "
 

@@ -76,3 +76,28 @@ def getAbsentEmployees(request):
         if len(absence_list)!=0:
             json[emp.id] = absence_list
     return Response(json)
+#Employee#
+@api_view(["GET"])
+def checkInbox(request,id):
+    emp = Employee.objects.get(pk = id)
+    messages = emp.message_set.all()
+    message_list = list()
+    for message in messages:
+        message_info = {
+            "type":message.type,
+            "creationDate":message.creationDate,
+	        "content":message.content
+        }
+        message_list.append(message_info)
+    return Response(message_list)
+
+@api_view(["POST"])
+def addAbsenceJustification(request):
+    serializer = justificationSerializer(data=request.data)
+    print(serializer.data["id"])
+    if serializer.is_valid():
+        absence = Absence.objects.get(pk=serializer.data["id"])
+        absence.justification=serializer.data["justification"]
+        absence.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
