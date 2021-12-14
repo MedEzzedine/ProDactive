@@ -1,0 +1,61 @@
+#BOT api#
+$$DONE$$ post: /bot/daily-absent-employees  
+{
+  "date":
+  "absentEmployees": [id1,id2]
+}
+
+$$DONE$$ check monthly/yearly score
+
+
+#Supervisor api#
+get: /supervisor/absent-employees
+{
+  "1":
+    [                                  
+	{
+	  "id":
+	  "date": 2000-20-20,
+	  "justification": link,
+	},
+	{
+	  "id": 
+	  "date": 2000-20-20,
+	  "justification": link,
+	}
+    ],
+   "3":
+}
+
+
+post: /supervisor/moderated-justification
+{
+	"validatedAbsences" : [id1,id2...]
+	"rejectedAbsences" : [id1,id2...]
+}
+
+
+#Employee api#
+get: /employee/<int:id>/inbox
+{
+    "messages":
+    [	
+    {
+	  "type":
+          "creationDate":
+	  "content":
+    },
+    {
+	  "type":
+          "creationDate":
+	  "content":
+    }
+    ]
+}
+
+post: /employee/add-justification
+{
+  "id": 1,
+  "justification": link
+}
+
